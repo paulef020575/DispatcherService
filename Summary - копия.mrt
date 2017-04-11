@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.0" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <Databases isList="true" count="1">
+      <DispatcherService Ref="2" type="Stimulsoft.Report.Dictionary.StiOleDbDatabase" isKey="true">
+        <Alias>DispatcherService</Alias>
+        <ConnectionString>Provider=LCPI.IBProvider.3.Free;Password=masterkey;Persist Security Info=True;User ID=sysdba;Data Source=Dispatcher;Location=172.18.39.135:c:\db_pulp\dispatcher1.fdb;ctype=WIN1251;auto_commit=True;auto_commit_level=4096;dbclient_library=gds32.dll;dbclient_type=ib</ConnectionString>
+        <Name>DispatcherService</Name>
+        <PromptUserNameAndPassword>False</PromptUserNameAndPassword>
+      </DispatcherService>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <ReportSummary Ref="3" type="Stimulsoft.Report.Dictionary.StiOleDbSource" isKey="true">
+        <Alias>ReportSummary</Alias>
+        <Columns isList="true" count="5">
+          <value>dateStart,System.DateTime</value>
+          <value>dateFinish,System.DateTime</value>
+          <value>state,System.Int32</value>
+          <value>nameState,System.String</value>
+          <value>countState,System.Int32</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>ReportSummary</Name>
+        <NameInSource>DispatcherService</NameInSource>
+        <Parameters isList="true" count="2">
+          <value>dateFrom,dateFrom,7,0</value>
+          <value>dateTo,dateTo,7,0</value>
+        </Parameters>
+        <SqlCommand>select * 
+	from ReportSummary(:dateFrom, :dateTo)
+	order by dateStart, state
+</SqlCommand>
+      </ReportSummary>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="2">
+      <value>,dateFrom,dateFrom,System.DateTime,_x0031_0_x002F_1_x002F_2012,False,False</value>
+      <value>,dateTo,dateTo,System.DateTime,_x0031_0_x002F_31_x002F_2012,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Страница1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <ЗаголовокОтчета1 Ref="5" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,1.8</ClientRectangle>
+          <Components isList="true" count="2">
+            <Текст1 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,19,1</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{ReportName}
+за период с {Format("{0:dd.MM.yyyy}", dateFrom)} по {Format("{0:dd.MM.yyyy}", dateTo)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="7" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст1>
+            <Кросс_таблица1 Ref="8" type="Stimulsoft.Report.CrossTab.StiCrossTab" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.8,19,2.6</ClientRectangle>
+              <Components isList="true" count="11">
+                <Кросс_таблица1_RowTotal1 Ref="9" type="Stimulsoft.Report.CrossTab.StiCrossRowTotal" isKey="true">
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>[255:255:255]</Brush>
+                  <ClientRectangle>0,1.3,3.8,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,8</Font>
+                  <Guid>28d4dfc25a7e44f9879e746c7e2c57ee</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_RowTotal1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>ВСЕГО</Text>
+                  <TextBrush>Black</TextBrush>
+                </Кросс_таблица1_RowTotal1>
+                <Кросс_таблица1_Row1_Title Ref="10" type="Stimulsoft.Report.CrossTab.StiCrossTitle" isKey="true">
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>White</Brush>
+                  <ClientRectangle>0,0.45,2,0.4</ClientRectangle>
+                  <Font>Arial,8</Font>
+                  <Guid>0fd1fb5813134aaaa6ba9622f01e39ad</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_Row1_Title</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>начало смены</Text>
+                  <TextBrush>[105:105:105]</TextBrush>
+                  <TypeOfComponent>Row:Кросс_таблица1_Row1</TypeOfComponent>
+                </Кросс_таблица1_Row1_Title>
+                <Кросс_таблица1_RowTotal2 Ref="11" type="Stimulsoft.Report.CrossTab.StiCrossRowTotal" isKey="true">
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>[255:255:255]</Brush>
+                  <ClientRectangle>2,1.3,0,0</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,8</Font>
+                  <Guid>efc15e4c2b99401e93bec66d7434a0d7</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_RowTotal2</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>Total</Text>
+                  <TextBrush>Black</TextBrush>
+                </Кросс_таблица1_RowTotal2>
+                <Кросс_таблица1_Row2_Title Ref="12" type="Stimulsoft.Report.CrossTab.StiCrossTitle" isKey="true">
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>White</Brush>
+                  <ClientRectangle>2,0.45,1.8,0.4</ClientRectangle>
+                  <Font>Arial,8</Font>
+                  <Guid>70dfe628811045009181092d204e1909</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_Row2_Title</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>завершение</Text>
+                  <TextBrush>[105:105:105]</TextBrush>
+                  <TypeOfComponent>Row:Кросс_таблица1_Row2</TypeOfComponent>
+                </Кросс_таблица1_Row2_Title>
+                <Кросс_таблица1_ColTotal1 Ref="13" type="Stimulsoft.Report.CrossTab.StiCrossColumnTotal" isKey="true">
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>[255:255:255]</Brush>
+                  <ClientRectangle>4.45,0.45,0,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,8</Font>
+                  <Guid>1c70a078598841f8a4a08de95ccaa949</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_ColTotal1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>Total</Text>
+                  <TextBrush>Black</TextBrush>
+                </Кросс_таблица1_ColTotal1>
+                <Кросс_таблица1_LeftTitle Ref="14" type="Stimulsoft.Report.CrossTab.StiCrossTitle" isKey="true">
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>White</Brush>
+                  <ClientRectangle>0,0,3.8,0.4</ClientRectangle>
+                  <Font>Arial,8</Font>
+                  <Guid>d60295d0b62d498e9ec0d2a90239db58</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_LeftTitle</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <TextBrush>[105:105:105]</TextBrush>
+                  <TypeOfComponent>LeftTitle</TypeOfComponent>
+                </Кросс_таблица1_LeftTitle>
+                <Кросс_таблица1_Row1 Ref="15" type="Stimulsoft.Report.CrossTab.StiCrossRow" isKey="true">
+                  <Alias>dateStart</Alias>
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>White</Brush>
+                  <ClientRectangle>0,0.9,2,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <DisplayValue>{ReportSummary.dateStart}</DisplayValue>
+                  <Font>Arial,8</Font>
+                  <Guid>c0bcce7d253f4a68a2cc3f818625e9db</Guid>
+                  <HorAlignment>Left</HorAlignment>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_Row1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>dateStart</Text>
+                  <TextBrush>[105:105:105]</TextBrush>
+                  <TextFormat Ref="16" type="CustomFormat" isKey="true">
+                    <StringFormat>dd.MM.yyyy HH:mm</StringFormat>
+                  </TextFormat>
+                  <TotalGuid>28d4dfc25a7e44f9879e746c7e2c57ee</TotalGuid>
+                  <Value>{ReportSummary.dateStart}</Value>
+                </Кросс_таблица1_Row1>
+                <Кросс_таблица1_Row2 Ref="17" type="Stimulsoft.Report.CrossTab.StiCrossRow" isKey="true">
+                  <Alias>dateFinish</Alias>
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>White</Brush>
+                  <ClientRectangle>2,0.9,1.8,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <DisplayValue>{ReportSummary.dateFinish}</DisplayValue>
+                  <Font>Arial,8</Font>
+                  <Guid>6cbc538fa34c4a8db4ae7e9e10329282</Guid>
+                  <HorAlignment>Left</HorAlignment>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_Row2</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <ShowTotal>False</ShowTotal>
+                  <Text>dateFinish</Text>
+                  <TextBrush>[105:105:105]</TextBrush>
+                  <TextFormat Ref="18" type="CustomFormat" isKey="true">
+                    <StringFormat>dd.MM.yyyy HH:mm</StringFormat>
+                  </TextFormat>
+                  <TotalGuid>efc15e4c2b99401e93bec66d7434a0d7</TotalGuid>
+                  <Value>{ReportSummary.dateFinish}</Value>
+                </Кросс_таблица1_Row2>
+                <Кросс_таблица1_Column1 Ref="19" type="Stimulsoft.Report.CrossTab.StiCrossColumn" isKey="true">
+                  <Alias>nameState</Alias>
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>White</Brush>
+                  <ClientRectangle>3.85,0.45,2,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <DisplayValue>{ReportSummary.nameState}</DisplayValue>
+                  <Font>Arial,8</Font>
+                  <Guid>22d171a4075b4b86b21b5333ec1cc466</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>2,0</MaxSize>
+                  <MinSize>2,0</MinSize>
+                  <Name>Кросс_таблица1_Column1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <ShowTotal>False</ShowTotal>
+                  <SortType>ByValue</SortType>
+                  <Text>nameState</Text>
+                  <TextBrush>[105:105:105]</TextBrush>
+                  <TextFormat Ref="20" type="GeneralFormat" isKey="true" />
+                  <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+                  <TotalGuid>1c70a078598841f8a4a08de95ccaa949</TotalGuid>
+                  <Value>{ReportSummary.state}</Value>
+                </Кросс_таблица1_Column1>
+                <Кросс_таблица1_Sum1 Ref="21" type="Stimulsoft.Report.CrossTab.StiCrossSummary" isKey="true">
+                  <Alias>countState</Alias>
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>[255:255:255]</Brush>
+                  <ClientRectangle>3.85,0.9,2,0.4</ClientRectangle>
+                  <Conditions isList="true" count="0" />
+                  <Font>Arial,8</Font>
+                  <Guid>dc01e95216414ffda6bf196081186048</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>2,0</MaxSize>
+                  <MinSize>2,0</MinSize>
+                  <Name>Кросс_таблица1_Sum1</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>0</Text>
+                  <TextBrush>Black</TextBrush>
+                  <TextFormat Ref="22" type="GeneralFormat" isKey="true" />
+                  <Value>{ReportSummary.countState}</Value>
+                </Кросс_таблица1_Sum1>
+                <Кросс_таблица1_RightTitle Ref="23" type="Stimulsoft.Report.CrossTab.StiCrossTitle" isKey="true">
+                  <Border>All;[155:155:155];1;Solid;False;4;Black</Border>
+                  <Brush>White</Brush>
+                  <ClientRectangle>3.85,0,2,0.4</ClientRectangle>
+                  <Font>Arial,8</Font>
+                  <Guid>8d5f756b32fc42b0b3351d52ce8cbba0</Guid>
+                  <Margins>0,0,0,0</Margins>
+                  <MaxSize>0,0</MaxSize>
+                  <MinSize>0,0</MinSize>
+                  <Name>Кросс_таблица1_RightTitle</Name>
+                  <Page isRef="4" />
+                  <Parent isRef="8" />
+                  <Text>состояние</Text>
+                  <TextBrush>[105:105:105]</TextBrush>
+                  <Type>Expression</Type>
+                  <TypeOfComponent>RightTitle</TypeOfComponent>
+                </Кросс_таблица1_RightTitle>
+              </Components>
+              <Conditions isList="true" count="0" />
+              <DataRelationName />
+              <DataSourceName>ReportSummary</DataSourceName>
+              <EmptyValue />
+              <Filters isList="true" count="0" />
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Кросс_таблица1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+            </Кросс_таблица1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ЗаголовокОтчета1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ЗаголовокОтчета1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>c374d15004684369a24c0db1451c8be7</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Страница1</Name>
+      <Page isRef="4" />
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="24" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Страница1>
+  </Pages>
+  <PrinterSettings Ref="25" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Сводная ведомость по автомобилям</ReportAlias>
+  <ReportChanged>9/22/2016 2:46:01 PM</ReportChanged>
+  <ReportCreated>10/25/2012 11:00:39 AM</ReportCreated>
+  <ReportGuid>5bf474bca9774a82829f167250ab8d6d</ReportGuid>
+  <ReportName>Сводная ведомость по автомобилям</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2008.2.300</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    
+    public class Сводная_ведомость_по_автомобилям : Stimulsoft.Report.StiReport
+    {
+        
+        public Сводная_ведомость_по_автомобилям()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

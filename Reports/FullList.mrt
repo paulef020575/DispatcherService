@@ -1,0 +1,690 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.0" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <Databases isList="true" count="1">
+      <Соединение Ref="2" type="Stimulsoft.Report.Dictionary.StiOleDbDatabase" isKey="true">
+        <Alias>Соединение</Alias>
+        <ConnectionString>Provider=LCPI.IBProvider.3.Free;Password=masterkey;Persist Security Info=True;User ID=sysdba;Data Source=DispatecherService;Location=atpserver:c:/db/dispatcher.fdb;ctype=WIN1251;auto_commit=True;unicode_mode=False;unicode_stmt=False;dbclient_library=""</ConnectionString>
+        <Name>Соединение</Name>
+        <PromptUserNameAndPassword>False</PromptUserNameAndPassword>
+      </Соединение>
+    </Databases>
+    <DataSources isList="true" count="1">
+      <FullData Ref="3" type="Stimulsoft.Report.Dictionary.StiOleDbSource" isKey="true">
+        <Alias>FullData</Alias>
+        <Columns isList="true" count="15">
+          <value>ID,System.Int32</value>
+          <value>DATECOMING,System.DateTime</value>
+          <value>UNITNAME,System.String</value>
+          <value>LICENSEPLATE,System.String</value>
+          <value>TRAILER,System.String</value>
+          <value>DRIVERNAME,System.String</value>
+          <value>CARGO,System.String</value>
+          <value>WHERETO,System.String</value>
+          <value>DATETOPOINT,System.DateTime</value>
+          <value>DATEFROMPOINT,System.DateTime</value>
+          <value>DATEOUT,System.DateTime</value>
+          <value>TRACKMARK,System.String</value>
+          <value>lastState,System.Int32</value>
+          <value>Warrant,System.String</value>
+          <value>pointName,System.String</value>
+        </Columns>
+        <CommandTimeout>30</CommandTimeout>
+        <Dictionary isRef="1" />
+        <Name>FullData</Name>
+        <NameInSource>Соединение</NameInSource>
+        <Parameters isList="true" count="14">
+          <value>:dateFrom,dateFrom,7,0</value>
+          <value>:dateTo,dateTo,7,0</value>
+          <value>:unit,unit,3,0</value>
+          <value>:unit1,unit,3,0</value>
+          <value>:hourFrom,hourFrom,3,0</value>
+          <value>:hourTo,hourTo,3,0</value>
+          <value>:hourFrom1,hourFrom,3,0</value>
+          <value>:hourTo1,hourTo,3,0</value>
+          <value>:hourFrom2,hourFrom,3,0</value>
+          <value>:hourTo2,hourTo,3,0</value>
+          <value>:hourFrom3,hourFrom,3,0</value>
+          <value>:hourTo3,hourTo,3,0</value>
+          <value>:hourFrom4,hourFrom,3,0</value>
+          <value>:hourTo4,hourTo,3,0</value>
+        </Parameters>
+        <SqlCommand>select a.id, 
+	s.dateState as dateComing,
+	u.name as unitName, p.name as pointName,
+	a.trackMark, a.licensePlate, a.trailer, a.driverName, a.cargo, a.whereTo, a.warrant,
+	(select dateState from docAppointStates where appoint = a.id and docState = 3) as dateToPoint, 
+	(select dateState from docAppointStates where appoint = a.id and docState = 5) as dateFromPoint, 
+	(select dateState from docAppointStates where appoint = a.id and docState = 100) as dateOut,
+	max(ass.docState) as lastState 
+    from docAppointStates s, refUnits u, docAppointStates ass, docAppoints a
+		left join refPoints p on a.point = p.id
+    where a.idUnit = u.id 
+        and s.appoint = a.id    
+		and s.docState = 0
+        and s.dateState between :dateFrom and :dateTo
+		and (:unit = 0 or :unit1 = a.idUnit)
+		and ass.appoint = a.id
+	group by a.id, dateComing, u.name, p.name, a.trackMark, a.licensePlate, a.trailer, a.driverName, a.cargo, a.whereTo, a.warrant,
+		dateToPoint, dateFromPoint, dateOut
+	having (:hourFrom = 0 and :hourTo = 24)
+			or (cast(:hourFrom1  as int) &lt; cast(:hourTo1  as int)
+				and cast((select	extract(hour from dateState) from docAppointStates where appoint = a.id and docState = 3) as int) &gt;= cast(:hourFrom2 as int)
+			    and cast((select	extract(hour from dateState)  from docAppointStates where appoint = a.id and docState = 3) as int)&lt; cast(:hourTo2 as int))
+			or (cast(:hourFrom3  as int)&gt; cast(:hourTo3 as int)
+				and (cast((select	extract(hour from dateState)  from docAppointStates where appoint = a.id and docState = 3) as int) &gt;= cast(:hourFrom4 as int)
+						or cast((select	extract(hour from dateState)  from docAppointStates where appoint = a.id and docState = 3) as int) &lt; cast(:hourTo4 as int)))
+			
+			
+
+</SqlCommand>
+      </FullData>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="5">
+      <value>,dateFrom,dateFrom,System.DateTime,_x0039__x002F_1_x002F_2012,False,False</value>
+      <value>,dateTo,dateTo,System.DateTime,_x0039__x002F_30_x002F_2012,False,False</value>
+      <value>,unit,unit,System.Int32,_x0030_,False,False</value>
+      <value>,hourFrom,hourFrom,System.Int32,_x0030_,False,False</value>
+      <value>,hourTo,hourTo,System.Int32,_x0032_4,False,False</value>
+    </Variables>
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Страница1 Ref="4" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="8">
+        <ЗаголовокОтчета1 Ref="5" type="ReportTitleBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,19,2</ClientRectangle>
+          <Components isList="true" count="3">
+            <Текст1 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,19,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст1</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>{ReportName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="7" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Текст1>
+            <Текст2 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0.8,19,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,10,Bold</Font>
+              <HorAlignment>Center</HorAlignment>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст2</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>прибывшего в ОАО Кондопога с {Format("{0:dd.MM.yyyy}", dateFrom)} по {Format("{0:dd.MM.yyyy}", dateTo)}
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="9" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст2>
+            <Текст22 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,1.4,19,0.6</ClientRectangle>
+              <Conditions isList="true" count="1">
+                <value>_x007B_hourFrom_x0020__x0021__x003D__x0020_0_x0020__x007C__x007C__x0020_hourTo_x0020__x0021__x003D__x0020_24_x007D_,Red,Transparent,Arial_x002C_8,True,False,</value>
+              </Conditions>
+              <Font>Arial,8.25,Regular,Point,False,204</Font>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст22</Name>
+              <Page isRef="4" />
+              <Parent isRef="5" />
+              <Text>(отправлены на погрузку с {hourFrom} по {hourTo} час.)</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="11" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст22>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ЗаголовокОтчета1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ЗаголовокОтчета1>
+        <ЗаголовокДанных1 Ref="12" type="HeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,3.2,19,1.2</ClientRectangle>
+          <Components isList="true" count="7">
+            <Текст3 Ref="13" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст3</Name>
+              <Page isRef="4" />
+              <Parent isRef="12" />
+              <Text>№ п/п
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="14" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст3>
+            <Текст4 Ref="15" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0,2.4,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <Guid>7e639cdfe9954bdcbea81cf30a4e38ea</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст4</Name>
+              <Page isRef="4" />
+              <Parent isRef="12" />
+              <Text>Дата прибытия</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="16" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст4>
+            <Текст5 Ref="17" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0,3.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <Guid>890a1fbbf5294a25a849d302d68c2286</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст5</Name>
+              <Page isRef="4" />
+              <Parent isRef="12" />
+              <Text>Автомобиль / прицеп</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="18" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст5>
+            <Текст6 Ref="19" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,0,3,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <Guid>8a42e596448b44fe91a75686695829fd</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст6</Name>
+              <Page isRef="4" />
+              <Parent isRef="12" />
+              <Text>Водитель
+доверенность</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="20" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст6>
+            <Текст7 Ref="21" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.6,0,3.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <Guid>8330fcd60871451ba56309a35cf76d2d</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст7</Name>
+              <Page isRef="4" />
+              <Parent isRef="12" />
+              <Text>Груз
+Пункт назначения</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="22" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст7>
+            <Текст9 Ref="23" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.8,0,3.2,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст9</Name>
+              <Page isRef="4" />
+              <Parent isRef="12" />
+              <Text>Состояние
+Время</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="24" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст9>
+            <Текст16 Ref="25" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.8,0,3,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <Guid>8952447300644d2dbd745dba726124cd</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст16</Name>
+              <Page isRef="4" />
+              <Parent isRef="12" />
+              <Text>Принят на
+погрузку/выгрузку
+Склад
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="26" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст16>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ЗаголовокДанных1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ЗаголовокДанных1>
+        <ЗаголовокГруппы1 Ref="27" type="GroupHeaderBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,5.2,19,0.4</ClientRectangle>
+          <Components isList="true" count="1">
+            <Текст10 Ref="28" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>EmptyBrush</Brush>
+              <ClientRectangle>0,0,19,0.4</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст10</Name>
+              <Page isRef="4" />
+              <Parent isRef="27" />
+              <Text>Подразделение: {FullData.UNITNAME}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="29" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст10>
+          </Components>
+          <Condition>{FullData.UNITNAME}</Condition>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ЗаголовокГруппы1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ЗаголовокГруппы1>
+        <ЗаголовокГруппы2 Ref="30" type="GroupHeaderBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,6.4,19,0.6</ClientRectangle>
+          <Components isList="true" count="1">
+            <Текст20 Ref="31" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,0,18.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст20</Name>
+              <Page isRef="4" />
+              <Parent isRef="30" />
+              <Text>Пункт погрузки/выгрузки: {FullData.pointName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="32" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст20>
+          </Components>
+          <Condition>{FullData.pointName}</Condition>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ЗаголовокГруппы2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ЗаголовокГруппы2>
+        <Данные1 Ref="33" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,7.8,19,0.8</ClientRectangle>
+          <Components isList="true" count="7">
+            <Текст11 Ref="34" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0,0,1,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8.25,Regular,Point,False,204</Font>
+              <HorAlignment>Right</HorAlignment>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст11</Name>
+              <Page isRef="4" />
+              <Parent isRef="33" />
+              <Text>{LineThrough}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="35" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст11>
+            <Текст12 Ref="36" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>1,0,2.4,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8.25,Regular,Point,False,204</Font>
+              <Guid>c915725f5cb347d08da0a46f3aea4308</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст12</Name>
+              <Page isRef="4" />
+              <Parent isRef="33" />
+              <Text>{Format("{0:dd.MM.yyyy HH:mm}", FullData.DATECOMING)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="37" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст12>
+            <Текст13 Ref="38" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>3.4,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8.25,Regular,Point,False,204</Font>
+              <Guid>da6ec52798bb4e81a3bc46a67da21d1c</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст13</Name>
+              <Page isRef="4" />
+              <Parent isRef="33" />
+              <Text>{FullData.TRACKMARK} {FullData.LICENSEPLATE}
+{FullData.TRAILER}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="39" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст13>
+            <Текст14 Ref="40" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>6.6,0,3,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8.25,Regular,Point,False,204</Font>
+              <Guid>62402163dbd64313bd0388cdb3316cc1</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст14</Name>
+              <Page isRef="4" />
+              <Parent isRef="33" />
+              <Text>{FullData.DRIVERNAME}
+{FullData.Warrant}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="41" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст14>
+            <Текст15 Ref="42" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>9.6,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8.25,Regular,Point,False,204</Font>
+              <Guid>90f6679c6dfc4c3685c584e93cf728cb</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст15</Name>
+              <Page isRef="4" />
+              <Parent isRef="33" />
+              <Text>{FullData.CARGO}
+{FullData.WHERETO}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="43" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст15>
+            <Текст8 Ref="44" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.8,0,3.2,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8.25,Regular,Point,False,204</Font>
+              <Guid>f07c804541ff48b28795cfd868b08da4</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст8</Name>
+              <Page isRef="4" />
+              <Parent isRef="33" />
+              <Text>{FullData.lastState &lt; 4 ? "ожидает погрузки/выгрузки" : 
+	(FullData.lastState == 5 ? Format("погружен/выгружен:\n{0:dd.MM.yyyy HH:mm}", FullData.DATEFROMPOINT) :
+		(FullData.lastState == 100 ? Format("отправлен без обработки:\n{0:dd.MM.yyyy HH:mm}", FullData.DATEOUT) : ""))}
+</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="45" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст8>
+            <Текст17 Ref="46" type="Text" isKey="true">
+              <Border>All;Black;1;Solid;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>12.8,0,3,0.8</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <Guid>b9710233ace846119216c18eccb7f702</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст17</Name>
+              <Page isRef="4" />
+              <Parent isRef="33" />
+              <Text>{IsNull(FullData,"DATETOPOINT") == true ? "" : Format("{0:dd.MM.yyyy HH:mm}", FullData.DATETOPOINT)}
+{IsNull(FullData, "pointName") == true ? "" : FullData.pointName}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="47" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст17>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName />
+          <DataSourceName>FullData</DataSourceName>
+          <Filters isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>Данные1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+          <Sort isList="true" count="2">
+            <value>ASC</value>
+            <value>DATECOMING</value>
+          </Sort>
+        </Данные1>
+        <ИтогГруппы2 Ref="48" type="GroupFooterBand" isKey="true">
+          <Border>All;Black;1;Solid;False;4;Black</Border>
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,9.4,19,0.6</ClientRectangle>
+          <Components isList="true" count="1">
+            <Текст21 Ref="49" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,0,8.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <Guid>2d2b0eb41f974f3985dc74381fd747a1</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст21</Name>
+              <Page isRef="4" />
+              <Parent isRef="48" />
+              <Text>Всего по пункту {FullData.pointName}: {Count()} автомашин</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="50" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст21>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ИтогГруппы2</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ИтогГруппы2>
+        <ИтогГруппы1 Ref="51" type="GroupFooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,10.8,19,1.8</ClientRectangle>
+          <Components isList="true" count="1">
+            <Текст18 Ref="52" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.4,0,8.4,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст18</Name>
+              <Page isRef="4" />
+              <Parent isRef="51" />
+              <Text>Всего по {FullData.UNITNAME}: {Count()} автомашин</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="53" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст18>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ИтогГруппы1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ИтогГруппы1>
+        <ИтогДанных1 Ref="54" type="FooterBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,13.4,19,2</ClientRectangle>
+          <Components isList="true" count="1">
+            <Текст19 Ref="55" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.6,0,8.4,1.2</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold</Font>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст19</Name>
+              <Page isRef="4" />
+              <Parent isRef="54" />
+              <Text>Всего {Count()} автомашин
+	погружено/выгружено {CountIf(FullData.lastState == 5)}
+	отправлено без обработки {CountIf(FullData.lastState == 100)}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="56" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст19>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>ИтогДанных1</Name>
+          <Page isRef="4" />
+          <Parent isRef="4" />
+        </ИтогДанных1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>fdbd9cb0392045e9bc71429fb26860d1</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Страница1</Name>
+      <Page isRef="4" />
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="57" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Страница1>
+  </Pages>
+  <PrinterSettings Ref="58" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Список автотранспорта,</ReportAlias>
+  <ReportChanged>8/2/2013 5:00:23 PM</ReportChanged>
+  <ReportCreated>10/5/2012 9:54:22 AM</ReportCreated>
+  <ReportGuid>b880cf06f2d146a48a7810f503091c00</ReportGuid>
+  <ReportName>Список автотранспорта,</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2008.2.300</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    
+    public class Список_автотранспорта : Stimulsoft.Report.StiReport
+    {
+        
+        public Список_автотранспорта()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

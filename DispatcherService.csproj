@@ -1,0 +1,542 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8127BFA7-A313-4AC2-8A43-D65039BD8C8B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DispatcherService</RootNamespace>
+    <AssemblyName>DispatcherService</AssemblyName>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <ManifestCertificateThumbprint>273D38D4C6FF9D0668D9ACD6F3712B86E8EFA4CF</ManifestCertificateThumbprint>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>\\172.17.0.30\exchange\Dispatcher\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Unc</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <MinimumRequiredVersion>1.3.0.0</MinimumRequiredVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPV.Controls">
+      <HintPath>..\..\EPV.Framework\EPV.Controls\bin\Release\EPV.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Stimulsoft.Base, Version=2008.2.300.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL" />
+    <Reference Include="Stimulsoft.Report, Version=2008.2.300.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL" />
+    <Reference Include="Stimulsoft.Report.Design, Version=2008.2.300.0, Culture=neutral, PublicKeyToken=ebe6666cba19647a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Documents\MaterialPermit\MaterialPermit.cs" />
+    <Compile Include="Classes\Documents\MaterialPermit\MaterialPermitItem.cs" />
+    <Compile Include="Classes\Documents\Permit.cs" />
+    <Compile Include="Classes\References\EntryPoint.cs" />
+    <Compile Include="FormRepointAppoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRepointAppoint.Designer.cs">
+      <DependentUpon>FormRepointAppoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialPermitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaterialPermitForm.Designer.cs">
+      <DependentUpon>MaterialPermitForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialPermitListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaterialPermitListForm.Designer.cs">
+      <DependentUpon>MaterialPermitListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateAppoint\PlanAppointControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CreateAppoint\PlanAppointControl.Designer.cs">
+      <DependentUpon>PlanAppointControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReferenceBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReferenceBox.Designer.cs">
+      <DependentUpon>ReferenceBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ref\CargoListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ref\CargoListForm.Designer.cs">
+      <DependentUpon>CargoListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\AppointState.cs" />
+    <Compile Include="Classes\AppointStates.cs" />
+    <Compile Include="Classes\DocAppoint.cs" />
+    <Compile Include="Classes\DocAppoints.cs" />
+    <Compile Include="Classes\Documents\PlanAppoint.cs" />
+    <Compile Include="Classes\Queries.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Queries.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\References\Cargo.cs" />
+    <Compile Include="Classes\References\Cargos.cs" />
+    <Compile Include="Classes\References\Point.cs" />
+    <Compile Include="Classes\References\Points.cs" />
+    <Compile Include="Classes\References\State.cs" />
+    <Compile Include="Classes\References\States.cs" />
+    <Compile Include="Classes\References\Unit.cs" />
+    <Compile Include="Classes\References\Units.cs" />
+    <Compile Include="Classes\References\Vehicle.cs" />
+    <Compile Include="Classes\References\VehicleMark.cs" />
+    <Compile Include="Enums\DocStateGroups.cs" />
+    <Compile Include="FormStart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStart.Designer.cs">
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateAppoint\CreateAppointForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateAppoint\CreateAppointForm.Designer.cs">
+      <DependentUpon>CreateAppointForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAccepting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAccepting.Designer.cs">
+      <DependentUpon>FormAccepting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAppoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAppoint.Designer.cs">
+      <DependentUpon>FormAppoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormBrakeOrOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBrakeOrOut.Designer.cs">
+      <DependentUpon>FormBrakeOrOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormCargos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormCargos.Designer.cs">
+      <DependentUpon>FormCargos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDispatcher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDispatcher.Designer.cs">
+      <DependentUpon>FormDispatcher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormGetAppoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormGetAppoint.Designer.cs">
+      <DependentUpon>FormGetAppoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormMainSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormMainSettings.Designer.cs">
+      <DependentUpon>FormMainSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPoints.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPoints.Designer.cs">
+      <DependentUpon>FormPoints.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormSetToPoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormSetToPoint.Designer.cs">
+      <DependentUpon>FormSetToPoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormStates.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormStates.Designer.cs">
+      <DependentUpon>FormStates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormUnits.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormUnits.Designer.cs">
+      <DependentUpon>FormUnits.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\PointAppointsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PointAppointsForm.Designer.cs">
+      <DependentUpon>PointAppointsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ItemEventArgs.cs" />
+    <Compile Include="CreateAppoint\PlanAppointListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CreateAppoint\PlanAppointListControl.Designer.cs">
+      <DependentUpon>PlanAppointListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ref\VMarkListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ref\VMarkListForm.Designer.cs">
+      <DependentUpon>VMarkListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VehicleItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VehicleItemForm.Designer.cs">
+      <DependentUpon>VehicleItemForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormRepointAppoint.resx">
+      <DependentUpon>FormRepointAppoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaterialPermitForm.resx">
+      <DependentUpon>MaterialPermitForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MaterialPermitListForm.resx">
+      <DependentUpon>MaterialPermitListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAppoint\PlanAppointControl.resx">
+      <DependentUpon>PlanAppointControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReferenceBox.resx">
+      <DependentUpon>ReferenceBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ref\CargoListForm.resx">
+      <DependentUpon>CargoListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Classes\Queries.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Queries.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStart.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormStart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAppoint\CreateAppointForm.resx">
+      <DependentUpon>CreateAppointForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAccepting.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAccepting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAppoint.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAppoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBrakeOrOut.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormBrakeOrOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormCargos.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormCargos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDispatcher.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormDispatcher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormGetAppoint.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormGetAppoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormMainSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormMainSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPoints.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormPoints.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormSetToPoint.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormSetToPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormStates.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormStates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormUnits.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormUnits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\PointAppointsForm.resx">
+      <DependentUpon>PointAppointsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAppoint\PlanAppointListControl.resx">
+      <DependentUpon>PlanAppointListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FormReportList.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReportList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\FormReportSummary.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormReportSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="resources\Message.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Message.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectItemForm.resx">
+      <DependentUpon>SelectItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControlPoint.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>UserControlPoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Ref\VMarkListForm.resx">
+      <DependentUpon>VMarkListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VehicleItemForm.resx">
+      <DependentUpon>VehicleItemForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reports\FormReportList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\FormReportList.Designer.cs">
+      <DependentUpon>FormReportList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\FormReportSummary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\FormReportSummary.Designer.cs">
+      <DependentUpon>FormReportSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="resources\Message.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Message.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SelectItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectItemForm.Designer.cs">
+      <DependentUpon>SelectItemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="UserControlPoint.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControlPoint.Designer.cs">
+      <DependentUpon>UserControlPoint.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\zapevalov\Connect\EPV\EPV.Database\EPV.Database.csproj">
+      <Project>{FC3364E3-98BE-4AAD-BA19-32C5D38D3F8D}</Project>
+      <Name>EPV.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\zapevalov\Connect\EPV\EPV.Data\EPV.Data.csproj">
+      <Project>{70E1CAEF-EA22-4C31-9256-07773763E719}</Project>
+      <Name>EPV.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\zapevalov\Connect\EPV\EPV.Forms\EPV.Forms\EPV.Forms.csproj">
+      <Project>{FE59E26B-4181-4750-944A-401EACAF5C99}</Project>
+      <Name>EPV.Forms</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DispatcherService.Resources\DispatcherService.Resources.csproj">
+      <Project>{30AF9CB0-BA5B-4951-98E2-8EFA38A00AD5}</Project>
+      <Name>DispatcherService.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+    <Content Include="FullList.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Summary.mrt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="resources\delete21.png" />
+    <None Include="resources\delete2.png" />
+    <None Include="resources\find_next1.png" />
+    <None Include="resources\printer3.png" />
+    <None Include="resources\refresh1.png" />
+    <None Include="resources\document_delete.png" />
+    <None Include="resources\document_edit.png" />
+    <None Include="resources\document_add.png" />
+    <None Include="resources\refresh.png" />
+    <None Include="resources\loader.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishFile Include="Stimulsoft.Base">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Stimulsoft.Controls">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Stimulsoft.Controls.Win">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Stimulsoft.Editor">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Stimulsoft.Report">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Stimulsoft.Report.Design">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+    <PublishFile Include="Stimulsoft.Report.Win">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Include</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>Assembly</FileType>
+    </PublishFile>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

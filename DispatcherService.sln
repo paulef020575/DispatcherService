@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherService", "DispatcherService.csproj", "{8127BFA7-A313-4AC2-8A43-D65039BD8C8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPV.Forms", "..\..\zapevalov\Connect\EPV\EPV.Forms\EPV.Forms\EPV.Forms.csproj", "{FE59E26B-4181-4750-944A-401EACAF5C99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPV.Database", "..\..\zapevalov\Connect\EPV\EPV.Database\EPV.Database.csproj", "{FC3364E3-98BE-4AAD-BA19-32C5D38D3F8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPV.Data", "..\..\zapevalov\Connect\EPV\EPV.Data\EPV.Data.csproj", "{70E1CAEF-EA22-4C31-9256-07773763E719}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DispatcherService.Resources", "..\DispatcherService.Resources\DispatcherService.Resources.csproj", "{30AF9CB0-BA5B-4951-98E2-8EFA38A00AD5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8127BFA7-A313-4AC2-8A43-D65039BD8C8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8127BFA7-A313-4AC2-8A43-D65039BD8C8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8127BFA7-A313-4AC2-8A43-D65039BD8C8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8127BFA7-A313-4AC2-8A43-D65039BD8C8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE59E26B-4181-4750-944A-401EACAF5C99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE59E26B-4181-4750-944A-401EACAF5C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE59E26B-4181-4750-944A-401EACAF5C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE59E26B-4181-4750-944A-401EACAF5C99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3364E3-98BE-4AAD-BA19-32C5D38D3F8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3364E3-98BE-4AAD-BA19-32C5D38D3F8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3364E3-98BE-4AAD-BA19-32C5D38D3F8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3364E3-98BE-4AAD-BA19-32C5D38D3F8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70E1CAEF-EA22-4C31-9256-07773763E719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70E1CAEF-EA22-4C31-9256-07773763E719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70E1CAEF-EA22-4C31-9256-07773763E719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70E1CAEF-EA22-4C31-9256-07773763E719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30AF9CB0-BA5B-4951-98E2-8EFA38A00AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30AF9CB0-BA5B-4951-98E2-8EFA38A00AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30AF9CB0-BA5B-4951-98E2-8EFA38A00AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30AF9CB0-BA5B-4951-98E2-8EFA38A00AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
