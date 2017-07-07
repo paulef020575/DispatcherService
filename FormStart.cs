@@ -13,6 +13,7 @@ using System.Data.Common;
 using System.Collections;
 using System.Security.Cryptography;
 using DispatcherService.Forms;
+using System.IO;
 
 namespace DispatcherService
 {
@@ -187,5 +188,27 @@ namespace DispatcherService
             MaterialPermitListForm form = new MaterialPermitListForm(this, database);
             form.Show();
         }
+
+        public void ShowAppointHistory()
+        {
+            FormHistory form = new DispatcherService.FormHistory(this, database);
+            form.Show();
+        }
+
+        public static string ApplicationFolder
+        {
+            get
+            {
+                string applicationFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                string applicationName = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+                applicationFolder = Path.Combine(applicationFolder, applicationName);
+
+                if (!Directory.Exists(applicationFolder))
+                    Directory.CreateDirectory(applicationFolder);
+
+                return applicationFolder;
+            }
+        }
+
     }
 }

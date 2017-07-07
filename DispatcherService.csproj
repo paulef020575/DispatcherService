@@ -38,8 +38,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <MinimumRequiredVersion>1.3.0.0</MinimumRequiredVersion>
-    <ApplicationRevision>1</ApplicationRevision>
+    <MinimumRequiredVersion>1.3.0.2</MinimumRequiredVersion>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -86,12 +86,28 @@
     <Compile Include="Classes\Documents\MaterialPermit\MaterialPermitItem.cs" />
     <Compile Include="Classes\Documents\Permit.cs" />
     <Compile Include="Classes\References\EntryPoint.cs" />
+    <Compile Include="HistoryForms\AppointLog.cs" />
+    <Compile Include="HistoryForms\FormAppointHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoryForms\FormAppointHistory.Designer.cs">
+      <DependentUpon>FormAppointHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormRepointAppoint.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormRepointAppoint.Designer.cs">
       <DependentUpon>FormRepointAppoint.cs</DependentUpon>
     </Compile>
+    <Compile Include="HistoryForms\AppointHistory.cs" />
+    <Compile Include="HistoryForms\AppointStateHistory.cs" />
+    <Compile Include="HistoryForms\FormHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoryForms\FormHistory.Designer.cs">
+      <DependentUpon>FormHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryForms\IAppointHistory.cs" />
     <Compile Include="MaterialPermitForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,8 +264,14 @@
     <Compile Include="VehicleItemForm.Designer.cs">
       <DependentUpon>VehicleItemForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="HistoryForms\FormAppointHistory.resx">
+      <DependentUpon>FormAppointHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormRepointAppoint.resx">
       <DependentUpon>FormRepointAppoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistoryForms\FormHistory.resx">
+      <DependentUpon>FormHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MaterialPermitForm.resx">
       <DependentUpon>MaterialPermitForm.cs</DependentUpon>
